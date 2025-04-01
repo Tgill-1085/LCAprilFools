@@ -105,13 +105,9 @@
 <body>
   <div class="container">
     <header class="header">
-      <h1 style="font-size: 1.875rem; font-weight: bold; margin-bottom: 0.5rem; color: #2563eb;">LaunchCode Executive Dashboard</h1>
+      <h1 style="font-size: 1.875rem; font-weight: bold; margin-bottom: 0.5rem; color: #2563eb;">LaunchCode Learner/Candidate Dashboard</h1>
       <div style="color: #6b7280; margin-bottom: 1rem;" id="currentTime">
         Loading current time...
-      </div>
-      <div class="banner">
-        <p style="font-weight: bold;">APRIL FOOLS!</p>
-        <p style="font-size: 0.875rem;">This dashboard contains absolutely no real metrics whatsoever</p>
       </div>
     </header>
     
@@ -143,7 +139,7 @@
       <div class="card">
         <h2 class="title">Learner/Candidate Emotional Journey</h2>
         <div id="emotionalJourneyChart" class="chart-container"></div>
-        <div class="description">Time spent in each emotional state during a typical tech learning journey</div>
+        <div class="description">Time spent in each emotional state during Courses</div>
       </div>
     </div>
     
@@ -180,7 +176,7 @@
           <div class="description">Missing semicolons account for 42%</div>
         </div>
         <div class="kpi-card">
-          <div style="font-size: 1.125rem; font-weight: 600;">Career Identity Crisis Success</div>
+          <div style="font-size: 1.125rem; font-weight: 600;">Career Identity Crisis/Success</div>
           <div class="value"><span id="kpi4">93</span>%<span class="up-arrow">↑</span></div>
           <div class="description">From 'what's coding?' to 'I dream in algorithms'</div>
         </div>
@@ -190,6 +186,10 @@
     <footer class="footer">
       <p>This dashboard auto-refreshes every time someone confuses a semicolon with a comma</p>
       <p style="margin-top: 0.25rem;">© <span id="currentYear">2025</span> LaunchCode - Creating tech careers through extreme caffeine consumption</p>
+      <div class="banner" style="margin-bottom: 20px;">
+        <p style="font-weight: bold;">HAPPY APRIL FOOLS!</p>
+        <p style="font-size: 0.875rem;">(This dashboard contains absolutely no real metrics whatsoever)</p>
+      </div>
     </footer>
   </div>
 
@@ -229,188 +229,68 @@
 
     // Initialize ECharts
     document.addEventListener('DOMContentLoaded', function() {
-      // Bug Chart with Line Race
+      // Bug Chart
       const bugChart = echarts.init(document.getElementById('bugChart'));
-      
-      // Prepare data for line race
-      const days = studentMetrics.map(item => item.name);
-      const raceOptions = [];
-      
-      // Create options for each day (for the animation)
-      days.forEach((day, index) => {
-        const currentData = studentMetrics.slice(0, index + 1);
-        
-        raceOptions.push({
-          title: {
-            text: `Day: ${day}`,
-            textStyle: {
-              fontSize: 16,
-              color: '#666'
-            },
-            left: 'center',
-            top: 10
-          },
-          xAxis: {
-            type: 'category',
-            data: currentData.map(item => item.name),
-            boundaryGap: false
-          },
-          series: [
-            {
-              name: 'Bugs Created',
-              type: 'line',
-              data: currentData.map(item => item.bugsCreated),
-              lineStyle: { width: 3 },
-              itemStyle: { color: '#FF8042' },
-              symbolSize: 8,
-              emphasis: {
-                focus: 'series',
-                lineStyle: { width: 5 }
-              },
-              markPoint: index === days.length - 1 ? {
-                data: [
-                  { type: 'max', name: 'Max', symbolSize: 60 }
-                ],
-                label: {
-                  formatter: '{c}'
-                }
-              } : {}
-            },
-            {
-              name: 'Bugs Actually Fixed',
-              type: 'line',
-              data: currentData.map(item => item.bugsFixed),
-              lineStyle: { width: 3 },
-              itemStyle: { color: '#82ca9d' },
-              symbolSize: 8,
-              emphasis: {
-                focus: 'series',
-                lineStyle: { width: 5 }
-              },
-              markPoint: index === days.length - 1 ? {
-                data: [
-                  { type: 'max', name: 'Max', symbolSize: 60 }
-                ],
-                label: {
-                  formatter: '{c}'
-                }
-              } : {}
-            },
-            {
-              name: 'Strands of Hair Pulled',
-              type: 'line',
-              data: currentData.map(item => item.hairPulled),
-              lineStyle: { width: 3 },
-              itemStyle: { color: '#8884d8' },
-              symbolSize: 8,
-              emphasis: {
-                focus: 'series',
-                lineStyle: { width: 5 }
-              },
-              markPoint: index === days.length - 1 ? {
-                data: [
-                  { type: 'max', name: 'Max', symbolSize: 60 }
-                ],
-                label: {
-                  formatter: '{c}'
-                }
-              } : {}
-            }
-          ]
-        });
-      });
-      
       const bugOption = {
-        baseOption: {
-          timeline: {
-            axisType: 'category',
-            autoPlay: true,
-            playInterval: 1000,
-            loop: true,
-            data: days,
-            controlStyle: {
-              showNextBtn: true,
-              showPrevBtn: true,
-              color: '#2563eb',
-              borderColor: '#2563eb'
-            },
-            checkpointStyle: {
-              color: '#2563eb',
-              borderColor: '#fff',
-              borderWidth: 2
-            },
-            label: {
-              color: '#666'
-            },
-            emphasis: {
-              label: {
-                color: '#2563eb'
-              }
-            }
-          },
-          tooltip: {
-            trigger: 'axis',
-            formatter: function(params) {
-              return params[0].name + '<br/>' +
-                params.map(item => {
-                  return item.marker + ' ' + item.seriesName + ': ' + item.value;
-                }).join('<br/>');
-            }
-          },
-          legend: {
-            data: ['Bugs Created', 'Bugs Actually Fixed', 'Strands of Hair Pulled'],
-            selected: {
-              'Bugs Created': true,
-              'Bugs Actually Fixed': true,
-              'Strands of Hair Pulled': true
-            },
-            bottom: 50
-          },
-          grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '20%',
-            top: '15%',
-            containLabel: true
-          },
-          xAxis: {
-            type: 'category',
-            data: days,
-            boundaryGap: false
-          },
-          yAxis: {
-            type: 'value',
-            axisLabel: {
-              formatter: '{value}'
-            }
-          },
-          series: [
-            {
-              name: 'Bugs Created',
-              type: 'line',
-              lineStyle: { width: 3 },
-              itemStyle: { color: '#FF8042' },
-              symbolSize: 8
-            },
-            {
-              name: 'Bugs Actually Fixed',
-              type: 'line',
-              lineStyle: { width: 3 },
-              itemStyle: { color: '#82ca9d' },
-              symbolSize: 8
-            },
-            {
-              name: 'Strands of Hair Pulled',
-              type: 'line',
-              lineStyle: { width: 3 },
-              itemStyle: { color: '#8884d8' },
-              symbolSize: 8
-            }
-          ]
+        title: {
+          text: '',
         },
-        options: raceOptions
+        tooltip: {
+          trigger: 'axis'
+        },
+        legend: {
+          data: ['Bugs Created', 'Bugs Actually Fixed', 'Strands of Hair Pulled']
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+        },
+        xAxis: {
+          type: 'category',
+          boundaryGap: false,
+          data: studentMetrics.map(item => item.name)
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [
+          {
+            name: 'Bugs Created',
+            type: 'line',
+            data: studentMetrics.map(item => item.bugsCreated),
+            lineStyle: {
+              width: 3
+            },
+            itemStyle: {
+              color: '#FF8042'
+            }
+          },
+          {
+            name: 'Bugs Actually Fixed',
+            type: 'line',
+            data: studentMetrics.map(item => item.bugsFixed),
+            lineStyle: {
+              width: 3
+            },
+            itemStyle: {
+              color: '#82ca9d'
+            }
+          },
+          {
+            name: 'Strands of Hair Pulled',
+            type: 'line',
+            data: studentMetrics.map(item => item.hairPulled),
+            lineStyle: {
+              width: 3
+            },
+            itemStyle: {
+              color: '#8884d8'
+            }
+          }
+        ]
       };
-      
       bugChart.setOption(bugOption);
 
       // Coffee Chart
