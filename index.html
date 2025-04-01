@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LaunchCode April Fools Dashboard</title>
   
+  <!-- Load ECharts from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+  
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -42,16 +45,9 @@
       margin: 10px 0;
       text-align: center;
     }
-    .chart-placeholder {
+    .chart-container {
       height: 300px;
-      background-color: #f9fafb;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      padding: 20px;
-      text-align: center;
+      width: 100%;
     }
     .alert {
       background-color: #fff1f1;
@@ -123,96 +119,14 @@
       <!-- Bug Creation Chart -->
       <div class="card">
         <h2 class="title">Bug Creation vs. Bug Fixing vs. Hair Pulled</h2>
-        <div class="chart-placeholder">
-          <div style="margin-bottom: 10px;">📈 Line Chart</div>
-          <table style="width: 100%; border-collapse: collapse; text-align: center;">
-            <thead>
-              <tr style="border-bottom: 1px solid #e5e7eb;">
-                <th style="padding: 8px;">Day</th>
-                <th style="padding: 8px;">Bugs Created</th>
-                <th style="padding: 8px;">Bugs Fixed</th>
-                <th style="padding: 8px;">Hair Pulled</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style="padding: 8px;">Mon</td>
-                <td style="padding: 8px;">10</td>
-                <td style="padding: 8px;">2</td>
-                <td style="padding: 8px;">5</td>
-              </tr>
-              <tr>
-                <td style="padding: 8px;">Tue</td>
-                <td style="padding: 8px;">20</td>
-                <td style="padding: 8px;">5</td>
-                <td style="padding: 8px;">15</td>
-              </tr>
-              <tr>
-                <td style="padding: 8px;">Wed</td>
-                <td style="padding: 8px;">35</td>
-                <td style="padding: 8px;">8</td>
-                <td style="padding: 8px;">25</td>
-              </tr>
-              <tr>
-                <td style="padding: 8px;">Thu</td>
-                <td style="padding: 8px;">55</td>
-                <td style="padding: 8px;">12</td>
-                <td style="padding: 8px;">40</td>
-              </tr>
-              <tr>
-                <td style="padding: 8px;">Fri</td>
-                <td style="padding: 8px;">80</td>
-                <td style="padding: 8px;">15</td>
-                <td style="padding: 8px;">65</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <div id="bugChart" class="chart-container"></div>
         <div class="description">Note: Hair regeneration not included in calculations</div>
       </div>
       
       <!-- Code Fuel Chart -->
       <div class="card">
         <h2 class="title">Code Fuel</h2>
-        <div class="chart-placeholder">
-          <div style="margin-bottom: 10px;">📊 Bar Chart</div>
-          <table style="width: 100%; border-collapse: collapse; text-align: center;">
-            <thead>
-              <tr style="border-bottom: 1px solid #e5e7eb;">
-                <th style="padding: 8px;">Day</th>
-                <th style="padding: 8px;">Coffee Cups (Gotta Code Fast)</th>
-                <th style="padding: 8px;">Snacks Over Keyboard</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style="padding: 8px;">Mon</td>
-                <td style="padding: 8px;">45</td>
-                <td style="padding: 8px;">2</td>
-              </tr>
-              <tr>
-                <td style="padding: 8px;">Tue</td>
-                <td style="padding: 8px;">30</td>
-                <td style="padding: 8px;">5</td>
-              </tr>
-              <tr>
-                <td style="padding: 8px;">Wed</td>
-                <td style="padding: 8px;">25</td>
-                <td style="padding: 8px;">12</td>
-              </tr>
-              <tr>
-                <td style="padding: 8px;">Thu</td>
-                <td style="padding: 8px;">20</td>
-                <td style="padding: 8px;">18</td>
-              </tr>
-              <tr>
-                <td style="padding: 8px;">Fri</td>
-                <td style="padding: 8px;">10</td>
-                <td style="padding: 8px;">25</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <div id="codeFuelChart" class="chart-container"></div>
         <div class="description">Note: Keyboard cleaning costs not included in tuition</div>
       </div>
     </div>
@@ -221,96 +135,14 @@
       <!-- Programming Language Analysis -->
       <div class="card">
         <h2 class="title">Programming Language Analysis</h2>
-        <div class="chart-placeholder">
-          <div style="margin-bottom: 10px;">🔄 Horizontal Bar Chart</div>
-          <table style="width: 100%; border-collapse: collapse; text-align: left;">
-            <thead>
-              <tr style="border-bottom: 1px solid #e5e7eb;">
-                <th style="padding: 8px;">Language</th>
-                <th style="padding: 8px;">Popularity</th>
-                <th style="padding: 8px;">Difficulty</th>
-                <th style="padding: 8px;">Coffee Compatibility</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style="padding: 8px;">JavaScript</td>
-                <td style="padding: 8px;">80%</td>
-                <td style="padding: 8px;">60%</td>
-                <td style="padding: 8px;">95%</td>
-              </tr>
-              <tr>
-                <td style="padding: 8px;">Python</td>
-                <td style="padding: 8px;">85%</td>
-                <td style="padding: 8px;">45%</td>
-                <td style="padding: 8px;">80%</td>
-              </tr>
-              <tr>
-                <td style="padding: 8px;">Java</td>
-                <td style="padding: 8px;">70%</td>
-                <td style="padding: 8px;">75%</td>
-                <td style="padding: 8px;">90%</td>
-              </tr>
-              <tr>
-                <td style="padding: 8px;">C#</td>
-                <td style="padding: 8px;">65%</td>
-                <td style="padding: 8px;">70%</td>
-                <td style="padding: 8px;">85%</td>
-              </tr>
-              <tr style="font-weight: bold; color: #2563eb;">
-                <td style="padding: 8px;">LaunchScript++</td>
-                <td style="padding: 8px;">99%</td>
-                <td style="padding: 8px;">20%</td>
-                <td style="padding: 8px;">110%</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <div id="languageChart" class="chart-container"></div>
         <div class="description">LaunchScript++ is our proprietary language that runs on pure enthusiasm</div>
       </div>
       
       <!-- Emotional Journey -->
       <div class="card">
         <h2 class="title">Learner/Candidate Emotional Journey</h2>
-        <div class="chart-placeholder">
-          <div style="margin-bottom: 10px;">🥧 Pie Chart</div>
-          <table style="width: 100%; border-collapse: collapse; text-align: left;">
-            <thead>
-              <tr style="border-bottom: 1px solid #e5e7eb;">
-                <th style="padding: 8px;">Emotional State</th>
-                <th style="padding: 8px;">Time Spent</th>
-                <th style="padding: 8px;">Percentage</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style="padding: 8px;">Excitement</td>
-                <td style="padding: 8px;">100 hours</td>
-                <td style="padding: 8px;">12.5%</td>
-              </tr>
-              <tr>
-                <td style="padding: 8px;">Confusion</td>
-                <td style="padding: 8px;">200 hours</td>
-                <td style="padding: 8px;">25%</td>
-              </tr>
-              <tr>
-                <td style="padding: 8px;">AI Temptation</td>
-                <td style="padding: 8px;">300 hours</td>
-                <td style="padding: 8px;">37.5%</td>
-              </tr>
-              <tr>
-                <td style="padding: 8px;">Enlightenment</td>
-                <td style="padding: 8px;">150 hours</td>
-                <td style="padding: 8px;">18.75%</td>
-              </tr>
-              <tr>
-                <td style="padding: 8px;">Job Offers</td>
-                <td style="padding: 8px;">50 hours</td>
-                <td style="padding: 8px;">6.25%</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <div id="emotionalJourneyChart" class="chart-container"></div>
         <div class="description">Time spent in each emotional state during a typical tech learning journey</div>
       </div>
     </div>
@@ -334,22 +166,22 @@
       <div class="kpi-cards">
         <div class="kpi-card">
           <div style="font-size: 1.125rem; font-weight: 600;">Stack Overflow Dependency</div>
-          <div class="value">87%<span class="up-arrow">↑</span></div>
+          <div class="value"><span id="kpi1">87</span>%<span class="up-arrow">↑</span></div>
           <div class="description">% of curriculum answerable via Stack Overflow</div>
         </div>
         <div class="kpi-card">
           <div style="font-size: 1.125rem; font-weight: 600;">Motivational Speeches</div>
-          <div class="value">14<span class="up-arrow">↑</span></div>
+          <div class="value"><span id="kpi2">14</span><span class="up-arrow">↑</span></div>
           <div class="description">Required per week to maintain morale</div>
         </div>
         <div class="kpi-card">
           <div style="font-size: 1.125rem; font-weight: 600;">Syntax Error Rate</div>
-          <div class="value">342<span class="up-arrow">↑</span></div>
+          <div class="value"><span id="kpi3">342</span><span class="up-arrow">↑</span></div>
           <div class="description">Missing semicolons account for 42%</div>
         </div>
         <div class="kpi-card">
           <div style="font-size: 1.125rem; font-weight: 600;">Career Identity Crisis Success</div>
-          <div class="value">93%<span class="up-arrow">↑</span></div>
+          <div class="value"><span id="kpi4">93</span>%<span class="up-arrow">↑</span></div>
           <div class="description">From 'what's coding?' to 'I dream in algorithms'</div>
         </div>
       </div>
@@ -362,6 +194,301 @@
   </div>
 
   <script>
+    // Data for charts
+    const studentMetrics = [
+      { name: 'Mon', bugsCreated: 10, bugsFixed: 2, hairPulled: 5 },
+      { name: 'Tue', bugsCreated: 20, bugsFixed: 5, hairPulled: 15 },
+      { name: 'Wed', bugsCreated: 35, bugsFixed: 8, hairPulled: 25 },
+      { name: 'Thu', bugsCreated: 55, bugsFixed: 12, hairPulled: 40 },
+      { name: 'Fri', bugsCreated: 80, bugsFixed: 15, hairPulled: 65 },
+    ];
+
+    const coffeeData = [
+      { name: 'Mon', cups: 45, snacksOverKeyboard: 2 },
+      { name: 'Tue', cups: 30, snacksOverKeyboard: 5 },
+      { name: 'Wed', cups: 25, snacksOverKeyboard: 12 },
+      { name: 'Thu', cups: 20, snacksOverKeyboard: 18 },
+      { name: 'Fri', cups: 10, snacksOverKeyboard: 25 },
+    ];
+
+    const programmingLanguageData = [
+      { name: 'JavaScript', popularity: 80, difficulty: 60, coffeeCompatibility: 95 },
+      { name: 'Python', popularity: 85, difficulty: 45, coffeeCompatibility: 80 },
+      { name: 'Java', popularity: 70, difficulty: 75, coffeeCompatibility: 90 },
+      { name: 'C#', popularity: 65, difficulty: 70, coffeeCompatibility: 85 },
+      { name: 'LaunchScript++', popularity: 99, difficulty: 20, coffeeCompatibility: 110 },
+    ];
+
+    const bootcampMilestoneData = [
+      { name: 'Excitement', value: 100 },
+      { name: 'Confusion', value: 200 },
+      { name: 'AI Temptation', value: 300 },
+      { name: 'Enlightenment', value: 150 },
+      { name: 'Job Offers', value: 50 },
+    ];
+
+    // Initialize ECharts
+    document.addEventListener('DOMContentLoaded', function() {
+      // Bug Chart
+      const bugChart = echarts.init(document.getElementById('bugChart'));
+      const bugOption = {
+        title: {
+          text: '',
+        },
+        tooltip: {
+          trigger: 'axis'
+        },
+        legend: {
+          data: ['Bugs Created', 'Bugs Actually Fixed', 'Strands of Hair Pulled']
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+        },
+        xAxis: {
+          type: 'category',
+          boundaryGap: false,
+          data: studentMetrics.map(item => item.name)
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [
+          {
+            name: 'Bugs Created',
+            type: 'line',
+            data: studentMetrics.map(item => item.bugsCreated),
+            lineStyle: {
+              width: 3
+            },
+            itemStyle: {
+              color: '#FF8042'
+            }
+          },
+          {
+            name: 'Bugs Actually Fixed',
+            type: 'line',
+            data: studentMetrics.map(item => item.bugsFixed),
+            lineStyle: {
+              width: 3
+            },
+            itemStyle: {
+              color: '#82ca9d'
+            }
+          },
+          {
+            name: 'Strands of Hair Pulled',
+            type: 'line',
+            data: studentMetrics.map(item => item.hairPulled),
+            lineStyle: {
+              width: 3
+            },
+            itemStyle: {
+              color: '#8884d8'
+            }
+          }
+        ]
+      };
+      bugChart.setOption(bugOption);
+
+      // Coffee Chart
+      const codeFuelChart = echarts.init(document.getElementById('codeFuelChart'));
+      const codeFuelOption = {
+        title: {
+          text: '',
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow'
+          }
+        },
+        legend: {
+          data: ['Coffee Cups (Gotta Code Fast)', 'Snacks Consumed Over Keyboard']
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+        },
+        xAxis: {
+          type: 'category',
+          data: coffeeData.map(item => item.name)
+        },
+        yAxis: [
+          {
+            type: 'value',
+            name: 'Coffee',
+            position: 'left',
+          },
+          {
+            type: 'value',
+            name: 'Snacks',
+            position: 'right',
+          }
+        ],
+        series: [
+          {
+            name: 'Coffee Cups (Gotta Code Fast)',
+            type: 'bar',
+            yAxisIndex: 0,
+            data: coffeeData.map(item => item.cups),
+            itemStyle: {
+              color: '#8884d8'
+            }
+          },
+          {
+            name: 'Snacks Consumed Over Keyboard',
+            type: 'bar',
+            yAxisIndex: 1,
+            data: coffeeData.map(item => item.snacksOverKeyboard),
+            itemStyle: {
+              color: '#FF8042'
+            }
+          }
+        ]
+      };
+      codeFuelChart.setOption(codeFuelOption);
+
+      // Programming Language Chart
+      const languageChart = echarts.init(document.getElementById('languageChart'));
+      const languageOption = {
+        title: {
+          text: '',
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow'
+          }
+        },
+        legend: {
+          data: ['Popularity', 'Difficulty', 'Coffee Compatibility']
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+        },
+        xAxis: {
+          type: 'value',
+          max: 120
+        },
+        yAxis: {
+          type: 'category',
+          data: programmingLanguageData.map(item => item.name),
+          axisLabel: {
+            formatter: function(value) {
+              return value === 'LaunchScript++' ? '{a|' + value + '}' : value;
+            },
+            rich: {
+              a: {
+                color: '#2563eb',
+                fontWeight: 'bold'
+              }
+            }
+          }
+        },
+        series: [
+          {
+            name: 'Popularity',
+            type: 'bar',
+            data: programmingLanguageData.map(item => item.popularity),
+            itemStyle: {
+              color: '#8884d8'
+            }
+          },
+          {
+            name: 'Difficulty',
+            type: 'bar',
+            data: programmingLanguageData.map(item => item.difficulty),
+            itemStyle: {
+              color: '#82ca9d'
+            }
+          },
+          {
+            name: 'Coffee Compatibility',
+            type: 'bar',
+            data: programmingLanguageData.map(item => item.coffeeCompatibility),
+            itemStyle: {
+              color: '#ffc658'
+            }
+          }
+        ]
+      };
+      languageChart.setOption(languageOption);
+
+      // Emotional Journey Chart
+      const emotionalJourneyChart = echarts.init(document.getElementById('emotionalJourneyChart'));
+      const emotionalJourneyOption = {
+        title: {
+          text: '',
+        },
+        tooltip: {
+          trigger: 'item',
+          formatter: '{a} <br/>{b}: {c} hours ({d}%)'
+        },
+        legend: {
+          orient: 'vertical',
+          left: 10,
+          data: bootcampMilestoneData.map(item => item.name)
+        },
+        series: [
+          {
+            name: 'Emotional State',
+            type: 'pie',
+            radius: ['40%', '70%'],
+            avoidLabelOverlap: false,
+            itemStyle: {
+              borderRadius: 10,
+              borderColor: '#fff',
+              borderWidth: 2
+            },
+            label: {
+              show: false,
+              position: 'center'
+            },
+            emphasis: {
+              label: {
+                show: true,
+                fontSize: '18',
+                fontWeight: 'bold'
+              }
+            },
+            labelLine: {
+              show: false
+            },
+            data: bootcampMilestoneData.map(item => ({
+              value: item.value,
+              name: item.name
+            })),
+            color: ['#8884d8', '#83a6ed', '#8dd1e1', '#82ca9d', '#a4de6c']
+          }
+        ]
+      };
+      emotionalJourneyChart.setOption(emotionalJourneyOption);
+
+      // Resize charts when window resizes
+      window.addEventListener('resize', function() {
+        bugChart.resize();
+        codeFuelChart.resize();
+        languageChart.resize();
+        emotionalJourneyChart.resize();
+      });
+    });
+
+    // Random KPIs
+    function updateKPIs() {
+      document.getElementById('kpi1').textContent = Math.floor(Math.random() * 100);
+      document.getElementById('kpi2').textContent = Math.floor(Math.random() * 20);
+      document.getElementById('kpi3').textContent = Math.floor(Math.random() * 500);
+      document.getElementById('kpi4').textContent = 80 + Math.floor(Math.random() * 20);
+    }
+
     // Simple script to update time
     function updateTime() {
       const now = new Date();
@@ -369,9 +496,11 @@
       document.getElementById('currentYear').textContent = now.getFullYear();
     }
     
-    // Initialize and update every second
+    // Initialize and update
     updateTime();
+    updateKPIs();
     setInterval(updateTime, 1000);
+    setInterval(updateKPIs, 5000); // Update KPIs every 5 seconds for fun
   </script>
 </body>
 </html>
