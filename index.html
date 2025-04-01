@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LaunchCode April Fools Dashboard</title>
+  
+  <!-- Load React -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  
+  <!-- Load Recharts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.10.3/Recharts.min.js"></script>
+  
+  <!-- Load Babel for JSX -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+
+  <!-- Load Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background-color: #f3f4f6;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+    .chart-container {
+      height: 300px;
+      width: 100%;
+    }
+    .alert {
+      background-color: #fff1f1;
+      border: 1px solid #ffcaca;
+      border-radius: 4px;
+      padding: 10px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: flex-start;
+    }
+    .alert-icon {
+      color: #e53e3e;
+      margin-right: 8px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .kpi-card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 16px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .banner {
+      background-color: #fffbeb;
+      border: 1px solid #fef3c7;
+      border-radius: 8px;
+      padding: 10px;
+      margin: 10px 0;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    // Use the components from the libraries
+    const {
+      LineChart, Line, BarChart, Bar, PieChart, Pie, XAxis, YAxis, 
+      CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell
+    } = Recharts;
+    
+    // Create our app component
+    const AprilFoolsDashboard = () => {
+      const [currentTime, setCurrentTime] = React.useState(new Date());
+      
+      React.useEffect(() => {
+        const timer = setInterval(() => {
+          setCurrentTime(new Date());
+        }, 1000);
+        
+        return () => {
+          clearInterval(timer);
+        };
+      }, []);
+
+      // Student silly metrics
+      const studentMetrics = [
+        { name: 'Mon', bugsCreated: 10, bugsFixed: 2, hairPulled: 5 },
+        { name: 'Tue', bugsCreated: 20, bugsFixed: 5, hairPulled: 15 },
+        { name: 'Wed', bugsCreated: 35, bugsFixed: 8, hairPulled: 25 },
+        { name: 'Thu', bugsCreated: 55, bugsFixed: 12, hairPulled: 40 },
+        { name: 'Fri', bugsCreated: 80, bugsFixed: 15, hairPulled: 65 },
+      ];
+
+      // Coffee and snacks consumption data
+      const coffeeData = [
+        { name: 'Mon', cups: 45, snacksOverKeyboard: 2 },
+        { name: 'Tue', cups: 30, snacksOverKeyboard: 5 },
+        { name: 'Wed', cups: 25, snacksOverKeyboard: 12 },
+        { name: 'Thu', cups: 20, snacksOverKeyboard: 18 },
+        { name: 'Fri', cups: 10, snacksOverKeyboard: 25 },
+      ];
+
+      // Programming language comparison
+      const programmingLanguageData = [
+        { name: 'JavaScript', popularity: 80, difficulty: 60, coffeeCompatibility: 95 },
+        { name: 'Python', popularity: 85, difficulty: 45, coffeeCompatibility: 80 },
+        { name: 'Java', popularity: 70, difficulty: 75, coffeeCompatibility: 90 },
+        { name: 'C#', popularity: 65, difficulty: 70, coffeeCompatibility: 85 },
+        { name: 'LaunchScript++', popularity: 99, difficulty: 20, coffeeCompatibility: 110 },
+      ];
+
+      // Bootcamp emotional journey
+      const bootcampMilestoneData = [
+        { name: 'Excitement', value: 100, color: '#8884d8' },
+        { name: 'Confusion', value: 200, color: '#83a6ed' },
+        { name: 'AI Temptation', value: 300, color: '#8dd1e1' },
+        { name: 'Enlightenment', value: 150, color: '#82ca9d' },
+        { name: 'Job Offers', value: 50, color: '#a4de6c' },
+      ];
+
+      // Education-themed alerts
+      const alerts = [
+        "WARNING: Students developing telepathic communication with their error messages",
+        "ALERT: Unprecedented surge in 'but it worked yesterday' incidents",
+        "NOTICE: Mentor patience reserves at critical levels",
+        "CRITICAL: Monday coffee surplus causing keyboard hover-typing phenomenon",
+        "UPDATE: Impostor syndrome spreading at pandemic levels",
+        "ALERT: Keyboard damage from snack debris reaching record levels"
+      ];
+
+      // Education-themed KPIs
+      const kpiData = [
+        { 
+          title: "Stack Overflow Dependency", 
+          value: `${Math.floor(Math.random() * 100)}%`, 
+          trend: "up", 
+          description: "% of curriculum answerable via Stack Overflow" 
+        },
+        { 
+          title: "Motivational Speeches", 
+          value: Math.floor(Math.random() * 20), 
+          trend: "up", 
+          description: "Required per week to maintain morale" 
+        },
+        { 
+          title: "Syntax Error Rate", 
+          value: Math.floor(Math.random() * 500), 
+          trend: "up", 
+          description: "Missing semicolons account for 42%" 
+        },
+        { 
+          title: "Career Identity Crisis Success", 
+          value: `${80 + Math.floor(Math.random() * 20)}%`, 
+          trend: "up", 
+          description: "From 'what's coding?' to 'I dream in algorithms'"
+        },
+      ];
+
+      return (
+        <div className="container">
+          <header className="header">
+            <h1 className="text-3xl font-bold mb-2 text-blue-600">LaunchCode Executive Dashboard</h1>
+            <div className="text-gray-500 mb-4">
+              {currentTime.toLocaleDateString()} | {currentTime.toLocaleTimeString()}
+            </div>
+            <div className="banner">
+              <p className="font-bold">APRIL FOOLS!</p>
+              <p className="text-sm">This dashboard contains absolutely no real metrics whatsoever</p>
+            </div>
+          </header>
+          
+          <div className="grid">
+            {/* Student Metrics */}
+            <div className="card">
+              <h2 className="text-xl font-bold mb-4">Bug Creation vs. Bug Fixing vs. Hair Pulled</h2>
+              <div className="chart-container">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={studentMetrics}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Line type="monotone" dataKey="bugsCreated" stroke="#FF8042" name="Bugs Created" strokeWidth={2} />
+                    <Line type="monotone" dataKey="bugsFixed" stroke="#82ca9d" name="Bugs Actually Fixed" strokeWidth={2} />
+                    <Line type="monotone" dataKey="hairPulled" stroke="#8884d8" name="Strands of Hair Pulled" strokeWidth={2} />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+              <div className="mt-2 text-sm text-gray-500 italic">Note: Hair regeneration not included in calculations</div>
+            </div>
+            
+            {/* Coffee & Snacks Consumption */}
+            <div className="card">
+              <h2 className="text-xl font-bold mb-4">Code Fuel</h2>
+              <div className="chart-container">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={coffeeData}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="name" />
+                    <YAxis yAxisId="left" orientation="left" stroke="#8884d8" />
+                    <YAxis yAxisId="right" orientation="right" stroke="#FF8042" />
+                    <Tooltip />
+                    <Legend />
+                    <Bar yAxisId="left" dataKey="cups" fill="#8884d8" name="Coffee Cups (Gotta Code Fast)" />
+                    <Bar yAxisId="right" dataKey="snacksOverKeyboard" fill="#FF8042" name="Snacks Consumed Over Keyboard" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+              <div className="mt-2 text-sm text-gray-500 italic">Note: Keyboard cleaning costs not included in tuition</div>
+            </div>
+          </div>
+          
+          <div className="grid">
+            {/* Programming Language Analysis */}
+            <div className="card">
+              <h2 className="text-xl font-bold mb-4">Programming Language Analysis</h2>
+              <div className="chart-container">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart
+                    layout="vertical"
+                    data={programmingLanguageData}
+                    margin={{
+                      top: 20,
+                      right: 30,
+                      left: 60,
+                      bottom: 5,
+                    }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis type="number" domain={[0, 120]} />
+                    <YAxis dataKey="name" type="category" />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="popularity" fill="#8884d8" name="Popularity" />
+                    <Bar dataKey="difficulty" fill="#82ca9d" name="Difficulty" />
+                    <Bar dataKey="coffeeCompatibility" fill="#ffc658" name="Coffee Compatibility" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+              <div className="mt-2 text-sm text-gray-500 italic">LaunchScript++ is our proprietary language that runs on pure enthusiasm</div>
+            </div>
+            
+            {/* Bootcamp Emotional Journey */}
+            <div className="card">
+              <h2 className="text-xl font-bold mb-4">Learner/Candidate Emotional Journey</h2>
+              <div className="chart-container">
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={bootcampMilestoneData}
+                      cx="50%"
+                      cy="50%"
+                      labelLine={false}
+                      outerRadius="80%"
+                      fill="#8884d8"
+                      dataKey="value"
+                      label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                    >
+                      {bootcampMilestoneData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.color} />
+                      ))}
+                    </Pie>
+                    <Tooltip />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+              <div className="mt-2 text-sm text-gray-500 italic">Time spent in each emotional state during a typical tech learning journey</div>
+            </div>
+          </div>
+          
+          {/* Alerts */}
+          <div className="card">
+            <h2 className="text-xl font-bold mb-4">Critical System Alerts</h2>
+            <div className="space-y-2">
+              {alerts.map((alert, index) => (
+                <div key={index} className="alert">
+                  <span className="alert-icon">!</span>
+                  {alert}
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          {/* KPI Cards */}
+          <div className="mt-6">
+            <h2 className="text-xl font-bold mb-4">Key Performance Indicators</h2>
+            <div className="grid">
+              {kpiData.map((kpi, index) => (
+                <div key={index} className="kpi-card">
+                  <div className="text-lg font-semibold">{kpi.title}</div>
+                  <div className="text-2xl font-bold text-blue-600 flex items-center">
+                    {kpi.value}
+                    {kpi.trend === "up" && <span className="ml-1 text-yellow-500">↑</span>}
+                  </div>
+                  <div className="text-sm text-gray-500">{kpi.description}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <footer className="mt-8 text-center text-gray-500 text-sm">
+            <p>This dashboard auto-refreshes every time someone confuses a semicolon with a comma</p>
+            <p className="mt-1">© {currentTime.getFullYear()} LaunchCode - Creating tech careers through extreme caffeine consumption</p>
+          </footer>
+        </div>
+      );
+    };
+    
+    // Render our app
+    ReactDOM.render(
+      <AprilFoolsDashboard />,
+      document.getElementById('root')
+    );
+  </script>
+</body>
+</html>
